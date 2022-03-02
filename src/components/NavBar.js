@@ -1,8 +1,10 @@
 import React from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { KEYS, ROLES } from "../constants";
 
+toast.configure();
 const NavBar = () => {
   const navigate = useNavigate();
 
@@ -44,6 +46,9 @@ const NavBar = () => {
                 <Nav.Link
                   onClick={() => {
                     localStorage.removeItem(KEYS.CURRENT_USER);
+                    toast.success("Logged out successfully!", {
+                      autoClose: 3000,
+                    });
                     navigate("/login");
                   }}
                 >

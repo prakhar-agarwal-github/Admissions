@@ -6,7 +6,9 @@ import { v4 as uuidv4 } from "uuid";
 import { Universities, Colleges } from "../data";
 import { KEYS, STATUS } from "../constants";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
+toast.configure();
 const NewApplication = () => {
   const [formData, setFormData] = useState({
     // Personal Details
@@ -81,6 +83,9 @@ const NewApplication = () => {
     );
 
     setSubmitting(false);
+    toast.success("Application is submitted successfully!", {
+      autoClose: 3000,
+    });
     navigate("/applications");
   };
 
