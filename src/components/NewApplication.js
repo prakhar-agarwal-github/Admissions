@@ -541,7 +541,7 @@ const NewApplication = () => {
                                   `${clg.code}` === e.target.value.split("/")[1]
                               );
 
-                              if (!clg) setCourses([]);
+                              if (!clg) return setCourses([]);
 
                               setCourses(clg.courses);
                             }}
