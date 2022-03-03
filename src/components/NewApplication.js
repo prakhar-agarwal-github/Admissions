@@ -541,9 +541,9 @@ const NewApplication = () => {
                                   `${clg.code}` === e.target.value.split("/")[1]
                               );
 
-                              if (clg) {
-                                setCourses(clg.courses);
-                              }
+                              if (!clg) setCourses([]);
+
+                              setCourses(clg.courses);
                             }}
                             className={`form-select form-control ${
                               touched.college && errors.college
