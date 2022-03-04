@@ -1,4 +1,4 @@
-import "./App.css";
+import { useEffect } from "react";
 import NavBar from "./components/NavBar";
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
@@ -16,8 +16,37 @@ import NewApplication from "./components/NewApplication";
 import Applications from "./components/Applications";
 import { KEYS, ROLES } from "./constants";
 import AdminPanel from "./components/AdminPanel";
+import { v4 as uuidv4 } from "uuid";
+import "./App.css";
 
 function App() {
+  useEffect(() => {
+    const users = JSON.parse(localStorage.getItem(KEYS.AVAILABLE_USERS));
+
+    const admin = {
+      id: uuidv4(),
+      email: "admin@admin.com",
+      name: "Admin",
+      password: "password",
+      userRole: ROLES.ADMIN,
+    };
+
+    if (!users)
+      return localStorage.setItem(
+        KEYS.AVAILABLE_USERS,
+        JSON.stringify([admin])
+      );
+
+    const doesAdminExists = users.some((user) => user.userRole === ROLES.ADMIN);
+
+    if (!doesAdminExists) {
+      localStorage.setItem(
+        KEYS.AVAILABLE_USERS,
+        JSON.stringify([...users, admin])
+      );
+    }
+  }, []);
+
   return (
     <Router>
       <NavBar />
